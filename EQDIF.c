@@ -72,4 +72,56 @@ void dadossin (void){
         scanf("%f", cons_func[cont]);
     }
 
+    for (cont =0; cont < maior_pot+1; cont++){
+        if( cont == 0){
+            if( (maior_pot - cont) > 1){
+                sprintf(functem, "%4.2fx^%d", cons_func[cont], maior_pot - cont );
+            }
+            else if( (maior_pot - cont) == 1 ){
+                sprintf(functemp, "%4.2fx", cons_func[cont]);
+                strcat(func, functemp);
+            }else if ((maior_pot - cont) == 0){
+                sprintf(functemp, "%4.2f", cons_func[cont]);
+                strcat(func, functemp);
+            }
+        }else if( (maior_pot - cont) == 1 ){
+            if(cons_func[cont] > 0 ){
+                sprintf(functemp, "+ %4.2fx", cons_func[cont]);
+                strcat(func, functemp);
+            }
+            else if( cons_func[cont] < 0 ){
+                sprintf(functemp, "%4.2fx", cons_func[cont]);
+                strcat(func, functemp);
+            }
+        }else if( (( maior_pot - cont) > 1) && cont != 0 ){
+            if (cons_func[cont] > 0 ){
+                sprintf(functemp, "+ %4.2fx^%d", cons_func[cont], maior_pot-cont );
+                strcat(func, functemp);
+            }else if( cons_func[cont] < 0 ){
+                sprintf(functemp, "%4.2f^x", cons_func[cont], maior_pot-cont);
+                strcat(func, functemp);
+            }
+        }else if ( (maior_pot - cont) == 0 ){
+            if(cons_func[cont] > 0 ){
+                sprintf(functemp, "+ %4.2f", cons_func[cont]);
+                strcat(func, functemp);
+            }
+            if ( cons_func[cont] < 0 ){
+                sprintf(functemp, "%4.2f", cons_func[cont]);
+                strcat(func, functemp);
+            }
+        }
+    }
+
+    printf("\nEntre com a condicao Inicial 'Y': ");
+    scanf("%f", &val_y);
+    printf("\nEntre com a condicao Inicial 'X': ");
+    scanf("%f", &val_x);
+    clrscr();
+    printf("\n\nA Equacao Diferencial eh:\ndy/dx = %s", func);
+    printf("\n\nAs condicoes iniciais sao: \ny = %4.2f\nx = %4.2f", val_y, val_x);
+    printf("\n\nDados completos! Pressione uma tecla...");
+    while ( !kbhit() );
+    dados = 1;
+
 }
