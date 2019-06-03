@@ -194,4 +194,5 @@ void calceqdif(void){
         sprintf(functemp, "%4.2f", cons_ed);
     }
     strcat(eqdif, functemp);
+    
 }
