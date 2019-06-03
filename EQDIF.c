@@ -125,3 +125,73 @@ void dadossin (void){
     dados = 1;
 
 }
+
+void calceqdif(void){
+    char functemp[20] = "";
+    float val_ed;
+
+    for (cont = 0; cont < maior_pot +1; cont++){
+        cons_ed[cont] = cons_func[cont] / (maior_pot - cont + 1); 
+    }
+    strcpy(eqdif, "");
+
+    for (cont = 0; cont < maior_pot +1; cont++){
+        if (cont == 0){
+            if((maior_pot - cont + 1)> 1){
+                sprintf(functemp, "%4.2fx^%d", cons_ed[cont], maior_pot- cont + 1);
+                strcat(eqdif, functemp);
+            }
+            else if((maior_pot - cont + 1) == 1){
+                sprintf(functemp, "%4.2fx", cons_ed[cont]);
+                strcat(eqdif, functemp);
+            }else if((maior_pot - cont - 1 ) == 0){
+                sprintf(functemp, "%4.2f", cons_ed[cont]);
+                strcat(eqdif, functemp);
+            }
+        }
+        else if((maior_pot - cont + 1) == 1){
+            if(cons_ed[cont] > 0){
+                sprintf(functemp, "+ %4.2fx", cons_ed[cont]);
+                strcat(eqdif, functemp);
+            }else if(cons_ed[cont] < 0){
+                sprintf(functemp, "%4.2fx", cons_ed[cont]);
+                strcat(eqdif, functemp);
+            }
+        }else if ( ((maior_pot - cont + 1) > 1) && (cont != 0)){
+            if (cons_ed[cont] > 0){
+                sprintf(functemp, "+ %4.2fx^%d", cons_ed[cont], maior_pot - cont +1);
+                strcat(eqdif, functemp);
+            }
+            else if( cons_ed[cont] < 0){
+                sprintf(functemp, "%4.2fx^%d", cons_ed[cont], maior_pot - cont + 1);
+                strcat(eqdif, functemp);
+            }
+        }else if( (maior_pot - cont + 1) == 0){
+            if (cons_ed[cont] > 0){
+                sprintf(functemp, "+ %4.2f", cons_ed[cont]);
+                strcat(eqdif, functemp);
+            }else if (cons_ed < 0 ){
+                sprintf(functemp, "%4.2f", cons_ed[cont]);
+                strcat(eqdif, functemp);
+               }   
+        }
+    }
+
+    val_ed = 0;
+
+    for (cont = 0; cont < maior_pot +1; cont++){
+        if ((maior_pot + 1 - cont ) > 0){
+            val_ed = val_ed + cons_ed[cont] * pow(val_x, (double)maior_pot+1-cont);
+        }else{
+            val_ed += cons_ed[cont];
+        }
+    }
+    cons_ed = val_y - val_x;
+
+    if(cons_ed > 0){
+        sprintf(functemp, "+ %4.2f", cons_ed);
+    }else if(cons_ed < 0){
+        sprintf(functemp, "%4.2f", cons_ed);
+    }
+    strcat(eqdif, functemp);
+}
