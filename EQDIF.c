@@ -11,13 +11,12 @@ void menu (void);
 void dadossin (void);
 void calceqdif (void);
 
-void main(){
-    ckrscr();
 
+int main(){
+ 
     do {
         menu();
         switch (item){
-            {
             case 1:
                 dadossin();
                 break;
@@ -29,22 +28,22 @@ void main(){
                 }else{
                     calceqdif();
                     printf("\n\nSolucao da Equacao Diferencial da Funcao\n\n");
-                    printf("dy/dx = %s\n\n com as condicoes iniciais dadas
-                            (y = %4.2f em x = %4.2f), e:\n\nf(x) = %s\n", func, val_y, val_x, eqdif);
+                    printf("dy/dx = %s\n\n com as condicoes iniciais dadas y = %4.2f em x = %4.2f), e:\n\nf(x) = %s\n", func, val_y, val_x, eqdif);
                     printf("Pressione uma tecla!");
                     while (!kbhit());
                 }
                 break;
             case 0:
                 break;
-        }while (item != 0);
-        
-    }
+        }
+    }while (item != 0);
+    
+    return 0;
 }
 
 void menu(void){
     do{
-        clrscr();
+
         printf("\n(0) - Sair");
         printf("\n(1) - Entrada de Dados");
         printf("\n(2) - Calcular Solucao da Equacao Diferencial\n\n");
@@ -53,14 +52,13 @@ void menu(void){
         if ( (item > 2) || (item < 0) ){
             printf("Invalido!! Pressione uma tecla!");
             while( !kbhit() );
-        }        //Págia 187
+        }    
     }while ( ( item < 0) || (item > 2) );
 }
 
 void dadossin (void){
     char functemp[20] = "";
-    clrscr();
-
+    
     printf("\nEntrando com a equacao diferencial dy/dx: ");
     printf("Entre com o valor da maior potencia de x da equacao diferencial> ");
     do{
@@ -69,13 +67,13 @@ void dadossin (void){
 
     for(cont = 0; cont < (maior_pot +1); cont++){
         printf("\nEntre com o valor da constate da potencia de %d de x da equacao diferencial: ", maior_pot - cont);
-        scanf("%f", cons_func[cont]);
+        scanf("%f", &cons_func[cont]);
     }
 
     for (cont =0; cont < maior_pot+1; cont++){
         if( cont == 0){
             if( (maior_pot - cont) > 1){
-                sprintf(functem, "%4.2fx^%d", cons_func[cont], maior_pot - cont );
+                sprintf(functemp, "%4.2fx^%d", cons_func[cont], maior_pot - cont );
             }
             else if( (maior_pot - cont) == 1 ){
                 sprintf(functemp, "%4.2fx", cons_func[cont]);
@@ -117,7 +115,7 @@ void dadossin (void){
     scanf("%f", &val_y);
     printf("\nEntre com a condicao Inicial 'X': ");
     scanf("%f", &val_x);
-    clrscr();
+    
     printf("\n\nA Equacao Diferencial eh:\ndy/dx = %s", func);
     printf("\n\nAs condicoes iniciais sao: \ny = %4.2f\nx = %4.2f", val_y, val_x);
     printf("\n\nDados completos! Pressione uma tecla...");
@@ -186,7 +184,7 @@ void calceqdif(void){
             val_ed += cons_ed[cont];
         }
     }
-    cons_ed = val_y - val_x;
+    const_ed = val_y - val_x;
 
     if(cons_ed > 0){
         sprintf(functemp, "+ %4.2f", cons_ed);
@@ -194,5 +192,5 @@ void calceqdif(void){
         sprintf(functemp, "%4.2f", cons_ed);
     }
     strcat(eqdif, functemp);
-    
+
 }
