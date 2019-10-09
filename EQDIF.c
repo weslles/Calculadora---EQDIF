@@ -22,6 +22,7 @@ int main(){
                 break;
             case 2:
                 if(!dados){
+                    printf("Rei do calculo"\n");
                     printf("\nNao houve entrada de dados!\n");
                     printf("Pressione uma tecla!");
                     while (!kbhit());
